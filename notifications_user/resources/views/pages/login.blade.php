@@ -62,7 +62,7 @@
                     setTimeout(() => {
                         $('#notifDiv').fadeOut();
                     }, 3000);
-                    
+                    window.location = "{{route('dashboard')}}"
                   } else if(data.verify_email) {
                       $('#notifDiv').fadeIn();
                        $('#notifDiv').css('background', 'red');

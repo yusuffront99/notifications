@@ -19,3 +19,7 @@ Route::post('/login_user', [UserController::class, 'login_user'])->name('login_u
 
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/register_store', [UserController::class, 'register_store'])->name('register_store');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
+});
