@@ -35,7 +35,7 @@ class UserController extends Controller
                 return $data;
             }
 
-            $query = DB::select("SELECT * FROM users ORDER BY id DESC LIMIT 10");
+            $query = DB::select("SELECT * FROM users ORDER BY id DESC LIMIT 3");
             $output = '';
 
             if(count($query) > 0) {
@@ -59,7 +59,7 @@ class UserController extends Controller
             $count = count($query1);
             $data = array(
                 'notification' => $output,
-                'unsen_notification' => $count
+                'unseen_notification' => $count
             );
 
             return response()->json($data);

@@ -15,7 +15,7 @@
 		</div>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span> <span class="glyphicon glyphicon-globe" style="font-size:18px;"></span></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span><span class="glyphicon glyphicon-globe" style="font-size:18px;"></span></a>
 				<ul class="dropdown-menu"></ul>
 			</li>
 		</ul>
@@ -78,10 +78,10 @@ $(document).ready(function(){
 			dataType:"json",
 			success:function(data)
 			{
-				$('.dropdown-menu').html(data.notification);
-				if(data.unseen_notification > 0){
-					$('.count').html(data.unseen_notification);
-				}
+			$('.dropdown-menu').html(data.notification);
+			if(data.unseen_notification > 0){
+				$('.count').html(data.unseen_notification);
+			}
 			}
 		});
 	}
