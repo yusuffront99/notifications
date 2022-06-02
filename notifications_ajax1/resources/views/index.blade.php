@@ -4,6 +4,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<meta name="csrf-token" content="{{csrf_token()}}">
 		<title>Bootstrap AJax Notify</title>
 	</head>
 <body>
@@ -32,12 +33,16 @@
 				<div>
 					<form class="form-inline" method="POST" id="add_form">
 						<div class="form-group">
-							<label>Firstname:</label>
-							<input type="text" name="firstName" id="firstName" class="form-control">
+							<label>Name:</label>
+							<input type="text" name="name" id="name" class="form-control">
 						</div>
 						<div class="form-group">
-							<label>Lastname:</label>
-							<input type="text" name="lastName" id="lastName" class="form-control">
+							<label>Email:</label>
+							<input type="email" name="email" id="email" class="form-control">
+						</div>
+						<div class="form-group m-2">
+							<label>Report:</label>
+							<textarea type="text" name="report" id="report" class="form-control"></textarea>
 						</div>
 						<div class="form-group">
 							<input type="submit" name="addnew" id="addnew" class="btn btn-primary" value="Add">
@@ -54,22 +59,29 @@
 		</div>
 	</div>
 </body>
+
 <script type = "text/javascript">
 $(document).ready(function(){
- 
+	$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
 	function unsen_notif(view = '')
 	{
 		$.ajax({
-			url:"fetch.php",
+			url:"fetch",
 			method:"POST",
 			data:{view:view},
 			dataType:"json",
 			success:function(data)
 			{
-			$('.dropdown-menu').html(data.notification);
-			if(data.unseen_notification > 0){
-			$('.count').html(data.unseen_notification);
-			}
+				$('.dropdown-menu').html(data.notification);
+				if(data.unseen_notification > 0){
+					$('.count').html(data.unseen_notification);
+				}
 			}
 		});
 	}
@@ -78,17 +90,19 @@ $(document).ready(function(){
  
 	$('#add_form').on('submit', function(event){
 		event.preventDefault();
-		if($('#firstName').val() != '' && $('#lastName').val() != ''){
+		if($('#name').val() != '' && $('#email').val() != '' && $('#report').val() !='')
+		{
 		var form_data = $(this).serialize();
 		$.ajax({
-			url:"addnew.php",
+			url:"store",
 			method:"POST",
 			data:form_data,
 			success:function(data)
-			{
-			$('#add_form')[0].reset();
-			unsen_notif();
-			}
+				{
+					console.log(data.message);
+					$('#add_form')[0].reset();
+					unsen_notif();
+				}
 		});
 		}
 		else{
