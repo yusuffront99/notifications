@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('notes');
-            $table->enum('conditions', ['Normal', 'Abnormal']);
+            $table->enum('conditions', ['normal', 'abnormal']);
+            $table->integer('seen_status')->default('0');
             $table->timestamps();
         });
     }

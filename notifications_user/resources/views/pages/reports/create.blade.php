@@ -20,9 +20,9 @@
                 <div class="form-group">
                     <label for="conditions">Conditions</label>
                     <select name="conditions" id="conditions" class="form-control">
-                        <option value="" disabled selected>-- Chooise Conditions --</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Abormal">Abormal</option>
+                        <option value="">-- Chooise Conditions --</option>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
                     </select>
                 </div>
             
