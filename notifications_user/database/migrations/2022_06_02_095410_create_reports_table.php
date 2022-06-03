@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id');
+            $table->string('title');
             $table->text('notes');
-            $table->enum('conditions', ['normal', 'abnormal']);
+            $table->enum('conditions', ['Normal', 'Abnormal']);
             $table->timestamps();
         });
     }

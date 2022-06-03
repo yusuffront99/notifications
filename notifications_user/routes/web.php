@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,6 @@ Route::post('/register_store', [UserController::class, 'register_store'])->name(
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/report', [ReportController::class, 'report'])->name('report');
+    Route::post('/create_report', [ReportController::class, 'create_report'])->name('create_report');
 });
